@@ -32,7 +32,7 @@ jobs:
 
     # these variables declared inside env of this job are scoped to be used within this job. Outside of this job, we will not be able to access these variables
     env:
-      Day_of_week: FunDay-Again
+      Greeting: FunDay-Again
       testvar: value-2
 
     # Steps represent a sequence of tasks that will be executed as part of the job
