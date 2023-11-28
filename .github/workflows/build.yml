@@ -53,9 +53,9 @@ jobs:
           echo "test var = ${{env.testvar}}"
         
         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
-        env:
-          Function: MyFuncton
-          testvar: value-2
+        # env:
+        #   Function: MyFuncton
+        #   testvar: value-2
 
       # Runs a set of commands using the runners shell
       # Runs a set of commands using the runners shell
