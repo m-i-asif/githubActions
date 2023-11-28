@@ -62,7 +62,7 @@ jobs:
       - run: "echo Hello Windows - build-app"
 
   package:
-    needs: [build, build-db]
+    needs: [build-app, build-db]
     runs-on: macos-latest
     steps:
       - run: "echo helloe mac - build, build-db"
