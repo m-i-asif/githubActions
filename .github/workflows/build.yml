@@ -14,7 +14,12 @@ on:
   # when specific activity happens, scheduled time, or when an event out side of github occures
   # take a look at events the trigger work flow https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
   workflow_dispatch:
-  
+    
+# Environment variables
+# These variables defined inside env at the top level of the workflow file are scoped for the entire workflow. Any step inside any job can access the value of these variables
+env:
+  Day_of_week: FunDay
+  testvar: value-1
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 # Job is a set of steps in a workflow that executes on the same runner. Each step is either a script that will be executed or an action that will run
@@ -24,6 +29,11 @@ jobs:
   build-app:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # these variables declared inside env of this job are scoped to be used within this job. Outside of this job, we will not be able to access these variables
+    env:
+      Day_of_week: FunDay-Again
+      testvar: value-2
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     # Steps are executed in order and are dependent on each other. We can transfer data between steps because each one is carried out on the same runner machine
@@ -37,6 +47,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
+      
+        # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
+        env:
+          Day_of_week: FunDay-Again
+          testvar: value-2
 
       # Runs a set of commands using the runners shell
       # Runs a set of commands using the runners shell
