@@ -47,7 +47,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-      
+        
         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
         env:
           Day_of_week: FunDay-Again
@@ -63,7 +63,16 @@ jobs:
   build-test-api:
     runs-on: windows-latest
     steps:
-      - run: "echo Hello build-test-api"
+      - run: |
+          echo Hello build-test-api
+          echo "$Greeting $First_name. Today is $Day_of_week"
+          echo "Test var = $testvar"
+          echo "test var = ${{env.testvar}}"
+        
+         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
+        env:
+          Day_of_week: build-test-api
+          testvar: value-3
 
   build-db:
     needs: build-app
