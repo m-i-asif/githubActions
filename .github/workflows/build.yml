@@ -71,7 +71,7 @@ jobs:
         
          # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
         env:
-          Day_of_week: build-test-api
+          First_name: build-test-api
           testvar: value-3
 
   build-db:
