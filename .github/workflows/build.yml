@@ -46,11 +46,15 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: |
+          echo Hello, world!
+          echo "$Greeting $Function. Today is $Day_of_week"
+          echo "Test var = $testvar"
+          echo "test var = ${{env.testvar}}"
         
         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
         env:
-          Day_of_week: FunDay-Again
+          Function: MyFuncton
           testvar: value-2
 
       # Runs a set of commands using the runners shell
@@ -64,7 +68,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - run: |
-          echo Hello build-test-api
+          echo "Hello build-test-api"
           echo "$Greeting $First_name. Today is $Day_of_week"
           echo "Test var = $testvar"
           echo "test var = ${{env.testvar}}"
