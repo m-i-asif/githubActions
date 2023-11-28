@@ -69,7 +69,7 @@ jobs:
     steps:
       - run: |
           echo "Hello build-test-api"
-          echo "$Greeting $First_name. Today is $Day_of_week"
+          echo "${{env.Greeting}} ${{env.First_name}}. Today is ${{env.Day_of_week}} "
           echo "Test var = $testvar"
           echo "test var = ${{env.testvar}}"
         
