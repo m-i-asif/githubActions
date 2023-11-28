@@ -49,7 +49,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Set a Value
         run: |
-          echo "action_state = Yellow" >> $GITHUB_ENV
+          echo "action_state=Yellow" >> $GITHUB_ENV
           
       - name: Use the Value
         id: step_two
