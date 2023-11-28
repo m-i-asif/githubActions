@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: A Basic Workflow
 
 # Controls when the workflow will run
 on:
@@ -11,18 +11,27 @@ on:
     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
+  # when specific activity happens, scheduled time, or when an event out side of github occures
+  # take a look at events the trigger work flow https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
   workflow_dispatch:
+  
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Job is a set of steps in a workflow that executes on the same runner. Each step is either a script that will be executed or an action that will run
+
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-app:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
+    # Steps are executed in order and are dependent on each other. We can transfer data between steps because each one is carried out on the same runner machine
+    # For instance, you can have a step that builds your application followed by a step that tests the application that was built in the previous step right.
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # each step is an action or a script that will run inside the boundry of a job
+      # action is a custom application for githum actions platform
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
@@ -30,7 +39,30 @@ jobs:
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
+      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+  build-api:
+    runs-on: windowns-latest
+    steps:
+      - run: "echo Hello build-api"
+
+  build-test-api:
+    runs-on: windowns-latest
+    steps:
+      - run: "echo Hello build-test-api"
+
+  build-db:
+    needs: build-app
+    runs-on: windowns-latest
+    steps:
+      - run: "echo Hello Windows - build-app"
+
+  package:
+    needs: [build, build-db]
+    runs-on: macos-latest
+    steps:
+      - run: "echo helloe mac - build, build-db"
