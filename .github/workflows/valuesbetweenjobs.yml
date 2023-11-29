@@ -26,13 +26,13 @@ jobs:
         run: |
           echo "::set-output name=test::ImportValue2"
 
-    # steps:
-    #   - id: step1
-    #     run: |
-    #       echo "variableName_1=This-is-variable-value-1" >> $GITHUB_ENV
-    #   - id: step2
-    #     run: |
-    #       echo "variableName_2=This-is-variable-value-2" >> $GITHUB_ENV
+    
+      - id: step3
+        run: |
+          echo "variableName_1=This-is-variable-value-1" >> $GITHUB_ENV
+      - id: step4
+        run: |
+          echo "variableName_2=This-is-variable-value-2" >> $GITHUB_ENV
 
   
   github-pass-value-job-2:
@@ -45,5 +45,7 @@ jobs:
           echo "Printing the Values"
           echo output1: ${{needs.github-pass-value-job-1.outputs.output1}}
           echo output2: ${{needs.github-pass-value-job-1.outputs.output2}}
+          echo variableName_1: ${{env.variableName_1}}
+          echo variableName_2: ${{env.variableName_2}}
      
       
