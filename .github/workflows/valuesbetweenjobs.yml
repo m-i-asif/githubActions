@@ -18,7 +18,7 @@ jobs:
       output1: ${{steps.step1.outputs.test}}
       output2: ${{steps.step2.outputs.test}}
       output3: ${{steps.step3.outputs.variableName1}}
-      # output4: ${{steps.step4.outputs.variableName2}}
+      output4: ${{steps.step4.outputs.variableName2}}
 
     steps:
       - id: step1
@@ -32,9 +32,9 @@ jobs:
       - id: step3
         run: |
           echo "variableName1=This-is-variable-value-1" >> $GITHUB_ENV
-      # - id: step4
-      #   run: |
-      #     echo "variableName2=This-is-variable-value-2" >> $GITHUB_ENV
+      - id: step4
+        run: |
+          echo "variableName2=This-is-variable-value-2" >> $GITHUB_ENV
 
   
   github-pass-value-job-2:
