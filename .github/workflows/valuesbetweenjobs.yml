@@ -17,6 +17,8 @@ jobs:
     outputs:
       output1: ${{steps.step1.outputs.test}}
       output2: ${{steps.step2.outputs.test}}
+      output3: ${{steps.step2.outputs.variableName_1}}
+      output4: ${{steps.step2.outputs.variableName_2}}
 
     steps:
       - id: step1
@@ -47,5 +49,7 @@ jobs:
           echo output2: ${{needs.github-pass-value-job-1.outputs.output2}}
           echo variableName_1: ${{env.variableName_1}}
           echo variableName_2: ${{env.variableName_2}}
+          echo output3: ${{needs.github-pass-value-job-1.outputs.output3}}
+          echo output4: ${{needs.github-pass-value-job-1.outputs.output4}}
      
       
