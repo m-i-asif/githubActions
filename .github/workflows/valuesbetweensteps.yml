@@ -20,7 +20,7 @@ jobs:
 
       - name: Create-Variables
         id: var_source_step
-        # Using this double colon, we can invoke GitHub Action workflow commands and then we are specifying the name of variable and the value that we want to assign to this variable. Value could be a static one or we can dynamically calculate the value and assign
+        # Using this double colon ::, we can invoke GitHub Action workflow commands and then we are specifying the name of variable and the value that we want to assign to this variable. Value could be a static one or we can dynamically calculate the value and assign
         run: |
           echo "Performing a random task"
           echo "::set-output name=var1_name::TechSchool"
