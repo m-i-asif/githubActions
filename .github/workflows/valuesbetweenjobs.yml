@@ -19,6 +19,7 @@ jobs:
       output2: ${{steps.step2.outputs.test}}
       output3: ${{steps.step3.outputs.variableName1}}
       output4: ${{steps.step4.outputs.variableName2}}
+      ENVIRONMENT: ${{ steps.set-var.outputs.ENVIRONMENT }}
 
     steps:
       - id: step1
@@ -27,29 +28,32 @@ jobs:
       - id: step2
         run: |
           echo "::set-output name=test::ImportValue2"
-
-    
       - id: step3
         run: |
           echo "variableName1=This-is-variable-value-1" >> $GITHUB_ENV
       - id: step4
         run: |
           echo "variableName2=This-is-variable-value-2" >> $GITHUB_ENV
+      - id: set-var
+        run: |
+          ENVIRONMENT=dev  
+          echo "The ENVIRONMENT var is: $ENVIRONMENT"
+          echo "ENVIRONMENT=$ENVIRONMENT" | tee -a $GITHUB_ENV $GITHUB_OUTPUT
 
   
   github-pass-value-job-2:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest   
     needs: github-pass-value-job-1
-
+    env:
+        ENVIRONMENT: ${{ needs.pass-var.outputs.ENVIRONMENT }}
     steps:
       - run: |
           echo "Printing the Values"
           echo output1: ${{needs.github-pass-value-job-1.outputs.output1}}
           echo output2: ${{needs.github-pass-value-job-1.outputs.output2}}
-          echo variableName_1: ${{env.variableName1}}
-          echo variableName_2: ${{env.variableName2}}
           echo output3: ${{needs.github-pass-value-job-1.outputs.output3}}
           echo output4: ${{needs.github-pass-value-job-1.outputs.output4}}
+          echo "The ENVIRONMENT var is set to: $ENVIRONMENT"
      
       
