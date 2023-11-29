@@ -19,7 +19,6 @@ jobs:
       output2: ${{steps.step2.outputs.test}}
       output3: ${{steps.step3.outputs.variableName1}}
       output4: ${{steps.step4.outputs.variableName2}}
-      ENVIRONMENT: ${{ steps.set-var.outputs.ENVIRONMENT }}
 
     steps:
       - id: step1
@@ -34,11 +33,7 @@ jobs:
       - id: step4
         run: |
           echo "variableName2=This-is-variable-value-2" >> $GITHUB_ENV
-      - id: set-var
-        run: |
-          ENVIRONMENT=dev  
-          echo "The ENVIRONMENT var is: $ENVIRONMENT"
-          echo "ENVIRONMENT=$ENVIRONMENT" | tee -a $GITHUB_ENV $GITHUB_OUTPUT
+
 
   
   github-pass-value-job-2:
@@ -54,6 +49,5 @@ jobs:
           echo output2: ${{needs.github-pass-value-job-1.outputs.output2}}
           echo output3: ${{needs.github-pass-value-job-1.outputs.output3}}
           echo output4: ${{needs.github-pass-value-job-1.outputs.output4}}
-          echo "The ENVIRONMENT var is set to: $ENVIRONMENT"
      
       
