@@ -55,7 +55,6 @@ jobs:
         id: step_two
         run: |
           echo "${{env.action_state}}" # This should out put Yellow"
-          echo "${{env.Day_of_week}}" # This should out put day of week which is Funday set at higher level in the build.yml "
         
         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
         # best way to use the env variables is between ${{}} ${{env.testvar}}
