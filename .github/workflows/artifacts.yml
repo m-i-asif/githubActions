@@ -40,7 +40,7 @@ jobs:
     # 
     steps:
       # use dowload artifact to download the file
-      - uses: actions/dowload-artifact@v2
+      - uses: actions/download-artifact@v2
         with:
           name: file
       - run: cat file.txt
