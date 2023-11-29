@@ -24,7 +24,7 @@ jobs:
           echo "::set-output name=test::ImportValue1"
       - id: step2
         run: |
-          echo echo "::set-output name=test::ImportValue2"
+          echo "::set-output name=test::ImportValue2"
 
     # steps:
     #   - id: step1
