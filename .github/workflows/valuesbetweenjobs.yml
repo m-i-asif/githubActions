@@ -20,10 +20,10 @@ jobs:
 
 
     steps:
-      - id: Step1
+      - id: step1
         run: |
           echo "variableName_1=This-is-variable-value-1" >> $GITHUB_ENV
-      - id: Step2
+      - id: step2
         run: |
           echo "variableName_2=This-is-variable-value-2" >> $GITHUB_ENV
 
