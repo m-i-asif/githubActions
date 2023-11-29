@@ -1,0 +1,42 @@
+# Passing values between jobs
+# If we generate a value in one step of a job, we can use the value in the subsequent steps of the same job by assigning the value to an environment variable. As we know, this is how we can create an environment variable and once the variable is created, this value can be directly referenced and used like this in the subsequent steps of the same job. Another way of making the values accessible in the next steps is using this set output command of GitHub Action workflows
+
+
+name: Passing values to next job
+
+# Controls when the workflow will run
+on: workflow_dispatch
+
+jobs:
+  # This workflow contains a single job called "build"
+  github-pass-value-job-1:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # map a step output to a job output
+    outputs:
+      output1: ${{steps.step1.outputs.test}}
+      output2: ${{steps.step2.outputs.test}}
+
+
+    steps:
+      - id: Step 1
+        run: |
+          echo "variableName_1=This-is-variable-value-1" >> $GITHUB_ENV
+      - id: Step 2
+        run: |
+          echo "variableName_2=This-is-variable-value-2" >> $GITHUB_ENV
+
+  
+  github-pass-value-job-2:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest   
+    needs: github-pass-value-job-1
+
+    steps:
+      - run: |
+          echo "Printing the Values"
+          echo output1: ${{needs.github-pass-value-job-1.outputs.output1}}
+          echo output2: ${{needs.github-pass-value-job-1.outputs.output2}}
+     
+      

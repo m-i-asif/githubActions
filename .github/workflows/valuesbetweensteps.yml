@@ -21,9 +21,10 @@ jobs:
       - name: Create-Variables
         id: var_source_step
         # Using this double colon ::, we can invoke GitHub Action workflow commands and then we are specifying the name of variable and the value that we want to assign to this variable. Value could be a static one or we can dynamically calculate the value and assign
+        # Warning: The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
         run: |
           echo "Performing a random task"
-          echo "::set-output name=var1_name::TechSchool"
+          echo "::set-output name=var1_name::TechSchool" 
           echo "::set-output name=var2_date::$(date +'%Y-%m-%d-%H-%M')"
 
       - name: Get-Variable-Value
