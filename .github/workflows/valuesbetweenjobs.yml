@@ -47,8 +47,8 @@ jobs:
           echo "Printing the Values"
           echo output1: ${{needs.github-pass-value-job-1.outputs.output1}}
           echo output2: ${{needs.github-pass-value-job-1.outputs.output2}}
-          echo variableName_1: ${{env.variableName1}}
-          echo variableName_2: ${{env.variableName2}}
+          echo variableName_1: $variableName1
+          echo variableName_2: $variableName2
           echo output3: ${{needs.github-pass-value-job-1.outputs.output3}}
           echo output4: ${{needs.github-pass-value-job-1.outputs.output4}}
      
