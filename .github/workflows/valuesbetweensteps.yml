@@ -1,0 +1,37 @@
+# Passing values between steps
+# If we generate a value in one step of a job, we can use the value in the subsequent steps of the same job by assigning the value to an environment variable. As we know, this is how we can create an environment variable and once the variable is created, this value can be directly referenced and used like this in the subsequent steps of the same job. Another way of making the values accessible in the next steps is using this set output command of GitHub Action workflows
+
+
+name: Passing values to next steps
+
+# Controls when the workflow will run
+on: workflow_dispatch
+
+jobs:
+  # This workflow contains a single job called "build"
+  github-secret:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set the value using env vars
+        run: |
+          echo "variableName=This-is-variable-value" >> $GITHUB_ENV
+
+      - name: Create-Variables
+        id: var_source_step
+        # Using this double colon, we can invoke GitHub Action workflow commands and then we are specifying the name of variable and the value that we want to assign to this variable. Value could be a static one or we can dynamically calculate the value and assign
+        run: |
+          echo "Performing a random task"
+          echo "::set-output name=var1_name::TechSchool"
+          echo "::set-output name=var2_date::$(date +'%Y-%m-%d-%H-%M')"
+
+      - name: Get-Variable-Value
+      #  in order to access the value of this variable here we are telling from all different steps within this job go to this particular step which is variable source step (var_source_step) and this is nothing but an id we have given for this previous step. This id can be used to uniquely locate a particular step. So go to this step, go to its outputs and get me the value of this variable.
+        run: |
+          echo VariableName: ${{env.variableName}}
+          echo VAR_1_Name: ${{steps.var_source_step.oputputs.var1_name}}
+          echo VAR_2_Date: ${{steps.var_source_step.oputputs.var2_date}}
+
+      
+      
