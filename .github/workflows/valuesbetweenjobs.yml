@@ -15,8 +15,8 @@ jobs:
 
     # map a step output to a job output
     outputs:
-      output1: ${{steps.step1.outputs.test}}
-      output2: ${{steps.step2.outputs.test}}
+      output1: ${{steps.step1.outputs.variableName_1}}
+      output2: ${{steps.step2.outputs.variableName_2}}
 
 
     steps:
