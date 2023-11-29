@@ -17,8 +17,8 @@ jobs:
     outputs:
       output1: ${{steps.step1.outputs.test}}
       output2: ${{steps.step2.outputs.test}}
-      output3: ${{steps.step2.outputs.variableName_1}}
-      output4: ${{steps.step2.outputs.variableName_2}}
+      output3: ${{steps.step3.outputs.variableName_1}}
+      output4: ${{steps.step4.outputs.variableName_2}}
 
     steps:
       - id: step1
