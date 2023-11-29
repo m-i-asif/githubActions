@@ -1,0 +1,42 @@
+# Artifacts allow us to persist data after a job has completed and share the data with another job in the same workflow. An artifact is a file or collection of 
+# files produced during a workflow run. For example, we can use artifacts to save our build or test output. After a work flow run has ended, we can build the code in
+# one place, store the package as an artifact, and use this package in the subsequent deploy jobs by downloading the artifact. Use of artifacts is very common in 
+# designing CI/CD pipelines. These are some common artifacts that we can upload
+    # common artifacts that can be uploaded
+      # log files or core dumps
+      # Test results, failures, and screenshots
+      # Binary or compressed files
+      # Stress Test performance test output and code overage resutls
+
+name: Artifacts Demo
+
+# Controls when the workflow will run
+on: push
+
+jobs:
+  # This workflow contains a single job called "build"
+  Job_1:
+    # The type of runner that the job will run on
+    name: upload Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Runs a single command using the runners shell
+      - name: Create a local file
+        run: echo "Hi, I am storing this data in this file. So that it can be used in the subsequent jobs within this workflow run. I will upload this file to github storage and download from there when needed in this workflow run." >> file.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: file
+          path: file.txt
+
+  jobs_2:
+    name: Download Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/upload-artifact@v2
+        with:
+          name: file
+      - run: cat file.txt

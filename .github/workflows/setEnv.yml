@@ -18,9 +18,9 @@ on: workflow_dispatch
 # Environment variables
 # These variables defined inside env at the top level of the workflow file are scoped for the entire workflow. Any step inside any job can access the value of these variables
 # best way to use the env variables is between ${{}} ${{env.testvar}}
-# env:
-#   Day_of_week: FunDay
-#   testvar: value-1
+env:
+  Day_of_week: FunDay
+  testvar: value-1
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 # Job is a set of steps in a workflow that executes on the same runner. Each step is either a script that will be executed or an action that will run
@@ -33,9 +33,9 @@ jobs:
 
     # these variables declared inside env of this job are scoped to be used within this job. Outside of this job, we will not be able to access these variables
     # best way to use the env variables is between ${{}} ${{env.testvar}}
-    # env:
-    #   Greeting: FunDay-Again
-    #   testvar: value-2
+    env:
+      Greeting: FunDay-Again
+      testvar: value-2
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     # Steps are executed in order and are dependent on each other. We can transfer data between steps because each one is carried out on the same runner machine
@@ -55,6 +55,7 @@ jobs:
         id: step_two
         run: |
           echo "${{env.action_state}}" # This should out put Yellow"
+
         
         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
         # best way to use the env variables is between ${{}} ${{env.testvar}}
@@ -69,20 +70,20 @@ jobs:
   #         echo Add other actions to build,
   #         echo test, and deploy your project.
 
-  # build-test-api:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - run: |
-  #         echo "Hello build-test-api"
-  #         echo "${{env.Greeting}} ${{env.First_name}}. Today is ${{env.Day_of_week}} "
-  #         echo "Test var = $testvar"
-  #         echo "test var = ${{env.testvar}}" 
+  build-test-api:
+    runs-on: windows-latest
+    steps:
+      - run: |
+          echo "Hello build-test-api"
+          echo "${{env.Greeting}} ${{env.First_name}}. Today is ${{env.Day_of_week}} "
+          echo "Test var = $testvar"
+          echo "test var = ${{env.testvar}}" 
         
-  #        # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
-  #        # best way to use the env variables is between ${{}} ${{env.testvar}}
-  #       env:
-  #         First_name: build-test-api
-  #         testvar: value-3
+         # these variables are scoped to this specific step within a job. No other step, be it inside the same job, will be able to use this information
+         # best way to use the env variables is between ${{}} ${{env.testvar}}
+        env:
+          First_name: build-test-api
+          testvar: value-3
 
   # build-db:
   #   needs: build-app
